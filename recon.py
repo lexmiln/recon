@@ -281,7 +281,7 @@ def get_player(path):
     return ReconPlayer(lines)
 
 def show_lines():
-    with open("test.recon") as f:
+    with open("recon/test.recon") as f:
         source = f.readlines()
 
     lines = ReconReader.translate(source)
@@ -295,6 +295,6 @@ def show_lines():
     for line in lines:
         print line
 
-def play_test():
+def play(script_name):
     colorama.init()
-    get_player("test.recon").play()
+    get_player("recon/%s.recon" % script_name).play()

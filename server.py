@@ -5,7 +5,7 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-player = recon.get_player("test.recon")
+player = recon.get_player("recon/steve.recon")
 
 @app.route('/')
 def root():
