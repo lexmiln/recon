@@ -19,7 +19,8 @@ var ENGINE = (function(){
     var $controlButton; 
 
     // react objects
-    var ui;
+    var reactTranscript;
+    var reactPrompts;
 
     var reset = function() {
         recognition.abort();
@@ -38,10 +39,15 @@ var ENGINE = (function(){
         // Ask the server for the first exchange.
         $.getJSON("/dialog/test/").done(handle);
 
-        var transcript = React.createElement(Transcript, {
-            "exchanges": exchanges
-        });
-        ui = React.render(transcript, document.getElementById('transcript-container'));
+        reactTranscript = React.render(
+            React.createElement(Transcript, {"exchanges": exchanges}), 
+            document.getElementById('transcript-container')
+        );
+            
+        reactPrompts = React.render(
+            React.createElement(Prompts, {"exchange": null}),
+            document.getElementById('prompts-container')
+        );
     };
     
     var listen = function() {
@@ -63,8 +69,12 @@ var ENGINE = (function(){
         exchanges.push(exchange);
         var msg = new SpeechSynthesisUtterance(exchange.agentSpeech);
         window.speechSynthesis.speak(msg);
-        ui.forceUpdate();
-
+        reactTranscript.forceUpdate();
+        reactPrompts = React.render(
+           React.createElement(Prompts, {"exchange": exchange}),
+           document.getElementById('prompts-container')
+        );
+        
         if (json.action === "input") {
             listen();
         }
@@ -81,7 +91,6 @@ var ENGINE = (function(){
         // Ask the server for the next part of the conversation.
         $.getJSON("/dialog/test/" + exchange.cursor + "/" + index).done(handle);
     };
-
 
     var control = function () {
         if (recognizing) {
@@ -115,7 +124,8 @@ var ENGINE = (function(){
             }
 
             exchange.updateWithTranscripts(finalized_speech, provisional_speech);
-            ui.forceUpdate();
+            reactTranscript.forceUpdate();
+            reactPrompts.forceUpdate();
         };
     };
 

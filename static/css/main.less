@@ -1,3 +1,20 @@
+.prompts {
+    ul {
+        list-style-type: none;
+        margin: 10px 0 20px 0;
+        padding: 0;
+
+        li {
+            font-size: 1.3em;
+            
+            .glyphicon-chevron-right {
+                font-weight: normal;
+                color: #888;
+            }
+        }
+    }
+}
+
 .transcript {
     background-color: rgb(249, 246, 215);
     box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
@@ -23,6 +40,12 @@
             
         }
 
+        .option .checkmark {
+            display: block;
+            float: left;
+            width: 20px;
+        }
+
         .speech {
             background-color: rgb(250, 249, 236);
             margin: 10px -20px;
@@ -39,42 +62,36 @@
             }
         }
 
-        .option {
-            
-            .checkmark {
-                display: block;
-                float: left;
-                width: 20px;
-            }
+    }
+}
 
-            .score {
-                display: block;
-                float: left;
-                width: 44px;
-                text-align: right;
-                padding-right: 4px;
-            }
+.option {
+    
+    .score {
+        display: block;
+        float: left;
+        width: 44px;
+        text-align: right;
+        padding-right: 4px;
+    }
 
-            &.ineligible {
-                .checkmark {
-                    color: transparent;
-                }
-            }
-            
-            &.eligible {
-                .checkmark {
-                    color: #BBB;
-                }
-            }
-            
-            &.winner {
-                font-weight: bold;
-                
-                .checkmark {
-                    color: black;
-                }
-            }
+    &.ineligible {
+        .checkmark {
+            color: transparent;
         }
-
+    }
+    
+    &.eligible {
+        .checkmark {
+            color: #BBB;
+        }
+    }
+    
+    &.winner {
+        font-weight: bold;
+        
+        .checkmark {
+            color: black;
+        }
     }
 }
