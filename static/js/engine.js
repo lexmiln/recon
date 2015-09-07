@@ -59,19 +59,15 @@ var ENGINE = (function(){
     // may continue the conversation, or signal that the conversation is
     // over.
     var handle = function(json) {
-        if (json.action === "stop") {
-            // TODO: Handle stop.
-        } else if (json.action === "input") {
-            exchange = new IVY.Exchange(json, winner);
-            exchanges.push(exchange);
-            
-            var msg = new SpeechSynthesisUtterance(exchange.agentSpeech);
-            msg.voiceURI = 'native';
-            window.speechSynthesis.speak(msg);
-            
-            ui.forceUpdate();
+        exchange = new IVY.Exchange(json, winner);
+        exchanges.push(exchange);
+        var msg = new SpeechSynthesisUtterance(exchange.agentSpeech);
+        window.speechSynthesis.speak(msg);
+        ui.forceUpdate();
+
+        if (json.action === "input") {
+            listen();
         }
-        listen();
     };
     
     // Called by exchanges when a winner has been chosen.

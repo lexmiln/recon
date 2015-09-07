@@ -207,7 +207,9 @@ class ReconPlayer(object):
 
             self.cursor += 1
         
-        return {"action": "stop"}
+        response["action"] = "stop"
+        response["in"] = []
+        return response
 
     def move_cursor_forward(self):
         self.cursor += 1

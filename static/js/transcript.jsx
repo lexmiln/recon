@@ -1,12 +1,12 @@
 var Transcript = React.createClass({
     render: function() {
-        var exchange_elements = _.map(this.props.exchanges, function(exchange) {
+        var exchangeElements = _.map(this.props.exchanges, function(exchange) {
             return <Exchange key={exchange.uniqueId} data={exchange}/>
         }, this);
         
         return <div className="transcript">
             <h2>Transcript</h2>
-            {exchange_elements}
+            {exchangeElements}
         </div>;
     }
 });
@@ -15,7 +15,7 @@ var Exchange = React.createClass({
     render: function() {
         var data = this.props.data;
         
-        var option_elements = _.map(data.userOptions, function(option) {
+        var optionElements = _.map(data.userOptions, function(option) {
             return <UserOption 
                 key={option.uniqueId} 
                 data={option} 
@@ -23,14 +23,20 @@ var Exchange = React.createClass({
                 />
         });
         
-        return <div className="exchange">
-            <h3>{data.agentSpeech}</h3>
-            <p className="speech">
+        var speechFeedback = null;
+        
+        if (data.userOptions.length) {
+            speechFeedback = <p className="speech">
                 <span className="prompt">&gt; </span>
                 <span className="final">{data.finalSpeech}</span>
                 <span className="provisional"> {data.provisionalSpeech}</span>
-            </p>
-            <ul>{option_elements}</ul>
+            </p>;
+        }
+        
+        return <div className="exchange">
+            <h3>{data.agentSpeech}</h3>
+            {speechFeedback}
+            <ul>{optionElements}</ul>
         </div>;
     }
 });
