@@ -1,0 +1,58 @@
+.transcript {
+  background-color: #f9f6d7;
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
+}
+.transcript > h2 {
+  margin: 0;
+  padding: 20px;
+}
+.transcript .exchange {
+  border-top: 1px dashed #BBB;
+  padding: 20px;
+}
+.transcript .exchange > h3 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.transcript .exchange ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.transcript .exchange .speech {
+  background-color: #faf9ec;
+  margin: 10px -20px;
+  padding: 10px 20px;
+  font-family: monospace;
+  font-weight: bold;
+}
+.transcript .exchange .speech .prompt {
+  color: #888;
+}
+.transcript .exchange .speech .provisional {
+  color: #888;
+}
+.transcript .exchange .option .checkmark {
+  display: block;
+  float: left;
+  width: 20px;
+}
+.transcript .exchange .option .score {
+  display: block;
+  float: left;
+  width: 44px;
+  text-align: right;
+  padding-right: 4px;
+}
+.transcript .exchange .option.ineligible .checkmark {
+  color: transparent;
+}
+.transcript .exchange .option.eligible .checkmark {
+  color: #BBB;
+}
+.transcript .exchange .option.winner {
+  font-weight: bold;
+}
+.transcript .exchange .option.winner .checkmark {
+  color: black;
+}

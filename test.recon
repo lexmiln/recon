@@ -1,0 +1,37 @@
+<- Hello, my name is Recon. What can I do for you today?
+1> What is Recon?
+<- That doesn't seem like a very polite way to start a 
+   conversation. I am Recon.
+1> I mean, why are you called Recon?
+<- "Recon" stands for "readable conversation". It's the 
+   format that this conversation is written in.
+!B qs
+  1> Who invented Recon? And can I meet them?
+    <- Recon was designed by Alex Macmillan as a way to quickly
+       write and proofread conversation trees.
+      1> Fascinating.
+        <- Anything else you'd like to know?
+          !J qs
+      2> This is cool and all, but actually, I have to go.
+        !Q
+  2> What is Recon's purpose?
+    <- To provide a way to quickly and easily write complex 
+       conversation scripts.
+    <- Recon supports multiple page monologues.
+    <- As you have already seen, Recon supports conversation
+       choices.
+    <- As you may have already discovered, Recon allows 
+       conversation to loop back so that the player can ask
+       multiple questions.
+      1> Enough about this already.
+        !J qs
+      2> Go on.
+        <- I will, thanks. Most importantly, Recon scripts
+           are easy to read and to write. This could be essential 
+           when writing conversation scripts for large numbers of 
+           characters, where the player has a lot of freedom to 
+           move conversations in interesting directions.
+        !J qs
+  3> Pretty interesting stuff. It was nice meeting you!
+    <- And it was nice meeting you too. Have a good day!
+    !Q
