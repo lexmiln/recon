@@ -103,7 +103,7 @@ class Line(object):
             self.content = line.strip()[3:]
 
     def __str__(self):
-        return "%s %s %s" % (LineType.to_string(self.type), self.indentation, self.content.replace("\n", "\n      "))
+        return "%3d %s %s %s" % (self.number, LineType.to_string(self.type), self.indentation, self.content.replace("\n", "\n      "))
 
     @staticmethod
     def detect_indentation(line):
@@ -141,7 +141,16 @@ class ReconPlayer(object):
     def log(self, msg):
         print Color.red("# " + msg)
 
-    def play(self):
+    def play(self, continuous=True, cursor=0, choice=None):
+        self.cursor = cursor
+        
+        response = {
+            "action": "input",
+            "out": "",
+            "in": [],
+            "cursor": 0
+        }
+        
         while True:
             if self.cursor >= len(self.lines):
                 self.log("Reached end of script - exiting.")
@@ -156,22 +165,36 @@ class ReconPlayer(object):
             if line.type is LineType.OUT:
                 self.log("Speech")
                 print line.content, "\n"
+                response["out"] += line.content + "\n";
 
             if line.type is LineType.IN:
                 self.log("Conversation choice")
                 in_lines = self.get_in_lines()
 
                 # Print the options.
+                response["in"] = []
                 option_number = 0
                 for line in in_lines:
                     option_number += 1
                     print "%s %s" % (Color.green(str(option_number) + ":"), line.content)
+                    response["in"].append(line.content)
 
                 # Get input.
-                option_chosen = self.get_choice(option_number)
+                if continuous:
+                    option_chosen = self.get_choice(option_number) - 1
+                elif choice is not None:
+                    # Use the choice given when the function was called
+                    option_chosen = choice
+                    # Now the choice has been made, erase it so it doesn't get reused.
+                    choice = None
+                else:
+                    # Because play is non-continuous, return the available choices.
+                    # The caller will call play again when a choice has been made.
+                    response["cursor"] = self.cursor
+                    return response
 
                 # Move the cursor to whichever line was chosen.
-                chosen_line = in_lines[option_chosen - 1]
+                chosen_line = in_lines[option_chosen]
                 self.move_cursor_to_line(chosen_line)
                 print
 
@@ -183,6 +206,8 @@ class ReconPlayer(object):
                 self.log("Bookmark " + line.content + " skipped")
 
             self.cursor += 1
+        
+        return {"action": "stop"}
 
     def move_cursor_forward(self):
         self.cursor += 1
