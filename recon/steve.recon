@@ -1,5 +1,10 @@
 <- Welcome to the test conversation.
--> Thanks, it's good to be here.
+1> Thanks, it's good to be here.
+  !J colour
+2> Can you hear me?
+  <- Yes.
+    -> Cool.
+!B colour
 <- What is your favorite colour?
 1> Purple.
   <- Purple is my favorite color too.
@@ -8,13 +13,13 @@
 2> Green.
   <- I don't like green. I prefer purple.
   -> To each, their own.
-  !J next
+    <- You could say that.
+    !J next
 3> Orange.
   <- Fair enough.
   -> Fine.
     !J next
   -> Got a problem with that?
-    <- No.
-    !J next
+    <- No, I guess not. ...
 !B next
 <- Well, it's been fun talking.
