@@ -1,5 +1,6 @@
 import recon
 import ssl
+import sys
 
 from flask import Flask, jsonify
 
@@ -35,4 +36,10 @@ def production_server():
     app.run(host="0.0.0.0", port=443, ssl_context=context)
         
 if __name__ == '__main__':
-    production_server()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "production":
+            production_server()
+        else:
+            print "Unrecognised flavor:", sys.argv[1]
+    else:
+        local_server()
