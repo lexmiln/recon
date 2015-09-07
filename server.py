@@ -1,4 +1,5 @@
 import recon
+import ssl
 
 from flask import Flask, jsonify
 
@@ -23,5 +24,8 @@ def choice(cursor, choice):
     )
         
 if __name__ == '__main__':
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    context.load_cert_chain('cert/server.crt', 'cert/server.key')
+    
     app.debug = True
-    app.run()
+    app.run(host="127.0.0.1", ssl_context=context)
