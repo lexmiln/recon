@@ -32,13 +32,19 @@ class ReconSyntaxError(Exception):
 
 
 class ReconReader(object):
-    def translate(self, lines):
+    @staticmethod
+    def get_lines(inp):
+        return ReconReader.concatenate_continuations(ReconReader.translate(inp))
+    
+    @staticmethod
+    def translate(lines):
         """Returns an list of Line objects for every line
         in the input list"""
         g = line_number_generator()
         return [Line(line, g.next()) for line in lines]
 
-    def concatenate_continuations(self, lines):
+    @staticmethod
+    def concatenate_continuations(lines):
         """Scans the input list for continuation lines,
         and prepends their content to the OUT or IN line
         that preceded them. Raises a ReconSyntaxError if the
@@ -243,18 +249,18 @@ def strip_out(line):
         return line[3:]
     return line
 
+def get_player(path):
+    with open(path) as f:
+        source = f.readlines()
+    lines = ReconReader.get_lines(source)
+    return ReconPlayer(lines)
 
-def play_test():
-    colorama.init()
-
+def show_lines():
     with open("test.recon") as f:
         source = f.readlines()
 
-    reader = ReconReader()
-
-    lines = reader.translate(source)
-
-    lines = reader.concatenate_continuations(lines)
+    lines = ReconReader.translate(source)
+    lines = ReconReader.concatenate_continuations(lines)
 
     print ""
     print "DUMP"
@@ -264,11 +270,6 @@ def play_test():
     for line in lines:
         print line
 
-    print ""
-    print "PLAY"
-    print "===="
-    print ""
-
-    player = ReconPlayer(lines)
-
-    player.play()
+def play_test():
+    colorama.init()
+    get_player("test.recon").play()
