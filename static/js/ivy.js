@@ -15,16 +15,14 @@ var IVY = (function(){
             .value();
     }
     
-    my.Exchange = function() {
-        this.agentSpeech = "Hi! Let's get to know eachother.";
-        this.userOptions = [
-            new my.Option("Who are you?"),
-            new my.Option("Tell me about yourself."),
-            new my.Option("How's it going?")
-        ];
+    my.Exchange = function(json, onwinner) {
+        this.cursor = json.cursor;
+        this.agentSpeech = json.out;
+        this.userOptions = _.map(json.in, function(str){ return new my.Option(str); });
         this.finalSpeech = "";
         this.provisionalSpeech = "";
         this.winner = null;
+        this.onwinner = onwinner;
         
         this.updateWithTranscripts = function(final, provisional) {
             this.provisionalSpeech = provisional;
@@ -44,9 +42,11 @@ var IVY = (function(){
                 return;
             }
             this.winner = _.find(this.userOptions, function(option) {
-                console.log("Checking winner", option, option.isEligibleToWin());
                 return option.isEligibleToWin();
             });
+            if (this.winner) {
+                this.onwinner(this.winner);
+            }
         }.bind(this);
         
         if (MOCK) {
