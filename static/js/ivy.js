@@ -4,7 +4,7 @@ var IVY = (function(){
     
     // What fraction of the max word score do we get for a word if it the voice 
     // recognition has only provisionally detected the word? 
-    var PROVISIONAL_MATCH_RATIO = 0.7;
+    var PROVISIONAL_MATCH_RATIO = 0.9;
     
     var my = {};
     
