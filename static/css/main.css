@@ -36,6 +36,25 @@
   float: left;
   width: 20px;
 }
+.transcript .exchange .option .score {
+  display: block;
+  float: left;
+  width: 44px;
+  text-align: right;
+  padding-right: 4px;
+}
+.transcript .exchange .option.ineligible .checkmark {
+  color: transparent;
+}
+.transcript .exchange .option.eligible .checkmark {
+  color: #BBB;
+}
+.transcript .exchange .option.winner {
+  font-weight: bold;
+}
+.transcript .exchange .option.winner .checkmark {
+  color: black;
+}
 .transcript .exchange .speech {
   background-color: #faf9ec;
   margin: 10px -20px;
@@ -48,23 +67,4 @@
 }
 .transcript .exchange .speech .provisional {
   color: #888;
-}
-.option .score {
-  display: block;
-  float: left;
-  width: 44px;
-  text-align: right;
-  padding-right: 4px;
-}
-.option.ineligible .checkmark {
-  color: transparent;
-}
-.option.eligible .checkmark {
-  color: #BBB;
-}
-.option.winner {
-  font-weight: bold;
-}
-.option.winner .checkmark {
-  color: black;
 }

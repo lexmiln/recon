@@ -60,8 +60,12 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-12">
-          <div id="transcript-container">
-              <p>The conversation transcript will be displayed here when you begin the conversation.</p>
+          <div id="transcript-warning">
+            <p>The transcript shows your conversation so far, words detected by voice recognition, and the scoring system that determines which of the available options you said. For better immersion, leave it hidden.</p>
+            <a class="btn btn-default" role="button" id="show-transcript">Show Transcript</a>
+          </div>
+          <div id="transcript-container" style="display: none;">
+            <p>The conversation transcript will be displayed here when you begin the conversation.</p>
           </div>
         </div>
       </div>

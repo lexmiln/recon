@@ -21,7 +21,8 @@ var Prompts = React.createClass({
             </div>
         } else {
             return <div className="prompts">
-                <p>The conversation has finished. You can start it again if you like.</p>
+                <p>{exchange.agentSpeech}</p>
+                <ul><li>The conversation has finished. You can start it again if you like.</li></ul>
             </div>
         }
     }
@@ -40,9 +41,6 @@ var Prompt = React.createClass({
 
         return <li className={"option " + status}>
             <i className="glyphicon glyphicon-chevron-right"></i> {option.sentence}
-            <span className="checkmark">
-                <i className="glyphicon glyphicon-ok"></i>
-            </span>
         </li>;
     }
 });

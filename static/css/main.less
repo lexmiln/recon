@@ -40,10 +40,40 @@
             
         }
 
-        .option .checkmark {
-            display: block;
-            float: left;
-            width: 20px;
+        .option {
+            .checkmark {
+                display: block;
+                float: left;
+                width: 20px;
+            }
+
+            .score {
+                display: block;
+                float: left;
+                width: 44px;
+                text-align: right;
+                padding-right: 4px;
+            }
+
+            &.ineligible {
+                .checkmark {
+                    color: transparent;
+                }
+            }
+
+            &.eligible {
+                .checkmark {
+                    color: #BBB;
+                }
+            }
+
+            &.winner {
+                font-weight: bold;
+                
+                .checkmark {
+                    color: black;
+                }
+            }
         }
 
         .speech {
@@ -60,38 +90,6 @@
             .provisional {
                 color: #888;
             }
-        }
-
-    }
-}
-
-.option {
-    
-    .score {
-        display: block;
-        float: left;
-        width: 44px;
-        text-align: right;
-        padding-right: 4px;
-    }
-
-    &.ineligible {
-        .checkmark {
-            color: transparent;
-        }
-    }
-    
-    &.eligible {
-        .checkmark {
-            color: #BBB;
-        }
-    }
-    
-    &.winner {
-        font-weight: bold;
-        
-        .checkmark {
-            color: black;
         }
     }
 }

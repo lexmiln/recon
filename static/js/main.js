@@ -22,6 +22,10 @@ $(function(){
     setUpUniqueIDs();
 
     $("#test-tts").click(testSpeech);    
+    $("#show-transcript").click(function(){
+        $("#transcript-warning").hide();
+        $("#transcript-container").show();
+    });
 
     ENGINE.setup($("#begin-conversation"));
 });
